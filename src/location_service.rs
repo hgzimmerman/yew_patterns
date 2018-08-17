@@ -8,10 +8,10 @@ impl LocationService {
         window().location().expect("Location should be present for browsers that support WASM")
     }
 
-    pub fn set_location(&mut self, location: String) {
+    pub fn set_location(&mut self, location_href: String) {
         let window = window();
         js! {
-            @{window}.location.href = @{location};
+            @{window}.location.href = @{location_href};
         };
     }
 }
