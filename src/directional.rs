@@ -47,7 +47,7 @@ impl <T> Sender<T> where T: Transferable + Clone + 'static {
         Sender(SenderImpl::<T>::bridge(callback))
     }
 
-    pub fn send(&self, msg: T) {
+    pub fn send(&mut self, msg: T) {
         self.0.send(msg)
     }
 }
