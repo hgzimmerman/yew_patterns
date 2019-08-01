@@ -18,16 +18,21 @@ impl Default for Msg {
     }
 }
 
+#[derive(Properties)]
+pub struct Props {
+    #[props(required)]
+    pub s: String
+}
 
 
 impl Component for SendingComponent {
-    type Properties = String;
+    type Properties = Props;
     type Message = Msg;
-    fn create(props: Self::Properties, link: ComponentLink<Self>) -> SendingComponent {
-        let sender = Sender::create(&link);
+    fn create(props: Self::Properties, mut link: ComponentLink<Self>) -> SendingComponent {
+        let sender = Sender::create(&mut link);
         SendingComponent{
             sender,
-            string: props
+            string: props.s
         }
     }
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -42,7 +47,7 @@ impl Component for SendingComponent {
         true
     }
     fn change(&mut self, props: Self::Properties) -> ShouldRender {
-        self.string = props;
+        self.string = props.s;
         true
     }
 }

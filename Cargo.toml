@@ -4,7 +4,9 @@ version = "0.1.0"
 authors = ["Henry Zimmerman <zimhen7@gmail.com>"]
 
 [dependencies]
-yew = { git = "https://github.com/DenisKolodin/yew", rev = "49319b8c02a8eeb15ed4c8a8761f83adcee856b0" }
+yew = { git = "https://github.com/DenisKolodin/yew", branch="master" }
 serde = "1.0"
 serde_derive = "1.0"
-stdweb = "0.4.8"
+stdweb = "0.4.18"
+
+

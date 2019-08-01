@@ -1,4 +1,3 @@
-#[macro_use]
 extern crate yew;
 extern crate yew_patterns;
 extern crate serde;
@@ -13,7 +12,7 @@ mod receiving_component;
 
 use sending_component::SendingComponent;
 use receiving_component::ReceivingComponent;
-
+use sending_component::Props;
 
 
 pub struct Model {
@@ -34,8 +33,8 @@ impl Component for Model {
 
 impl Renderable<Model> for Model {
     fn view(&self) -> Html<Model> {
-        let props_hello = "Hello World".to_string();
-        let props_goodbye = "Goodbye World".to_string();
+        let props_hello = Props{s:"Hello World".to_string()};
+        let props_goodbye = Props{s:"Goodbye World".to_string()};
         html!{
             <div>
                 <SendingComponent: with props_hello, />

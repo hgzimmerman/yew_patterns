@@ -24,10 +24,10 @@ impl Transferable for Void {}
 
 
 
-pub struct Sender<T>(Box<Bridge<SenderImpl<T>>>) where T: Transferable + Clone + 'static;
+pub struct Sender<T>(Box<dyn Bridge<SenderImpl<T>>>) where T: Transferable + Clone + 'static;
 
 impl <T> Sender<T> where T: Transferable + Clone + 'static {
-    pub fn create<U>(link: &ComponentLink<U>) -> Self
+    pub fn create<U>(link: &mut ComponentLink<U>) -> Self
     where
         U: Component,
         U::Message: Default, // TODO It would be nice if this constraint could be removed
@@ -57,7 +57,7 @@ impl <T> Sender<T> where T: Transferable + Clone + 'static {
 /// This creates a unidirectional message bus.
 struct SenderImpl<T> where T: Transferable + Clone + 'static
 {
-    receiver: Box<Bridge<ReceiverImpl<T>>>
+    receiver: Box<dyn Bridge<ReceiverImpl<T>>>
 }
 
 
@@ -89,12 +89,12 @@ impl<T> Agent for SenderImpl<T> where T: Transferable + Clone  + 'static
 
 
 
-pub struct Receiver<T>(Box<Bridge<ReceiverImpl<T>>>) where T: Transferable + Clone + 'static;
+pub struct Receiver<T>(Box<dyn Bridge<ReceiverImpl<T>>>) where T: Transferable + Clone + 'static;
 
 impl <T> Receiver<T> where T: Transferable + Clone + 'static {
     /// Creates a Receiver of the same channel type as its component.
     /// If the channel type is different than the component's message type `new()` should be used instead.
-    pub fn create<U>(link: &ComponentLink<U> ) -> Self
+    pub fn create<U>(link: &mut ComponentLink<U> ) -> Self
     where
         U: Component<Message=T> + Renderable<U>
     {

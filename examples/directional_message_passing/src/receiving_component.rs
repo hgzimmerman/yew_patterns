@@ -23,13 +23,13 @@ impl Transferable for InterComponentMessage {}
 impl Component for ReceivingComponent {
     type Properties = ();
     type Message = InterComponentMessage;
-    fn create(_props: Self::Properties, link: ComponentLink<Self>) -> ReceivingComponent {
+    fn create(_props: Self::Properties, mut link: ComponentLink<Self>) -> ReceivingComponent {
         // create() can be called to create Receivers that have the same message type as the channel type.
         // new() works as well if the Message and the channel type aren't the same.
 
         ReceivingComponent {
             value: None,
-            _receiver: Receiver::create(&link)
+            _receiver: Receiver::create(&mut link)
         }
     }
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
