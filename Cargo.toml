@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Henry Zimmerman <zimhen7@gmail.com>"]
 
 [dependencies]
-//yew = { git = "https://github.com/DenisKolodin/yew", branch="master" }
+#yew = { git = "https://github.com/DenisKolodin/yew", branch="master" }
 yew = { git = "https://github.com/hgzimmerman/yew", branch="component_on_mount" }
 serde = "1.0"
 serde_derive = "1.0"
